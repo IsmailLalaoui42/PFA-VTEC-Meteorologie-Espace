@@ -1,0 +1,130 @@
+/* ============================================================
+   PFA VTEC dashboard - editorial CSS
+   Editorial / lab-grade / cold aesthetic.
+   OKLCH palette, one accent (warm orange), hairlines, grain overlay.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  --bg:     #F6F7F8;
+  --bg-2:   #EEF0F2;
+  --ink:    #16181C;
+  --muted:  #5F6470;
+  --rule:   #D7D9DD;
+  --accent: #E55A1F;
+  --accent-soft: #F3BC9F;
+  --gray-70: #A8ABB3;
+  --gray-50: #7A7D85;
+  --gray-30: #3F4248;
+}
+
+* { box-shadow: none !important; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "EB Garamond", "Garamond", "Cormorant Garamond", serif;
+  font-size: 16px;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ui, .mono { font-family: "JetBrains Mono", "Menlo", monospace; }
+.sans      { font-family: "Inter", system-ui, sans-serif; }
+
+/* Grain overlay - 4 % SVG noise */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("grain.svg");
+  background-repeat: repeat;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  z-index: 99999;
+}
+
+/* Tabs - hairline flat, no Bootstrap cards */
+.tabs-parent .tab, .tabs .tab {
+  background: var(--bg) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--rule) !important;
+  padding: 12px 18px !important;
+  font-family: "JetBrains Mono", monospace !important;
+  font-size: 11px !important;
+  letter-spacing: 0.16em !important;
+  color: var(--muted) !important;
+  text-transform: uppercase !important;
+  transition: color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tabs-parent .tab:hover, .tabs .tab:hover { color: var(--ink) !important; }
+.tabs-parent .tab--selected, .tabs .tab--selected {
+  color: var(--ink) !important;
+  border-bottom: 1.5px solid var(--accent) !important;
+  background: var(--bg) !important;
+}
+
+/* Dash dropdowns + sliders */
+.rc-slider-rail   { background-color: var(--rule) !important; height: 2px !important; }
+.rc-slider-track  { background-color: var(--accent) !important; height: 2px !important; }
+.rc-slider-handle {
+  border: 1.5px solid var(--accent) !important;
+  background: var(--bg) !important;
+  width: 12px !important; height: 12px !important;
+  margin-top: -5px !important;
+}
+.rc-slider-handle:focus, .rc-slider-handle:hover {
+  border-color: var(--accent) !important;
+  background: var(--accent) !important;
+}
+.rc-slider-mark-text { color: var(--muted) !important; }
+
+.Select-control, .Select-menu-outer {
+  border: 1px solid var(--rule) !important;
+  border-radius: 0 !important;
+  background: var(--bg) !important;
+  font-family: "JetBrains Mono", monospace !important;
+  font-size: 12px !important;
+}
+
+/* Dash DataTable - hairline only, no zebra */
+.dash-table-container .dash-spreadsheet-container .dash-spreadsheet-inner table {
+  border-collapse: collapse !important;
+}
+.dash-cell, .dash-header {
+  border-bottom: 1px solid var(--rule) !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  font-family: "JetBrains Mono", monospace !important;
+}
+
+/* KPI tiles */
+.kpi-tile { border: none; }
+
+/* Headings */
+h1, h2, h3 {
+  font-family: "EB Garamond", "Garamond", serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* Links */
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
+a:hover { border-bottom-color: var(--accent); }
+
+/* Selection */
+::selection { background: var(--accent); color: var(--bg); }
+
+/* Scrollbar - thin, neutral */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--rule); }
+::-webkit-scrollbar-thumb:hover { background: var(--gray-50); }
