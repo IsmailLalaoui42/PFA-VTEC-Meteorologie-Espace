@@ -51,9 +51,9 @@ htmlcov/
 coverage.xml
 *.cover
 
-# Phase 2 — artefacts d'entraînement (pas dans ce livrable Visualisation)
-reports/
-models/
+# Artefacts d'entraînement (binaires, non versionnes)
+/reports/
+/models/
 *.joblib
 *.pkl
 *.h5
