@@ -14,6 +14,7 @@ Période couverte : octobre 2015 → septembre 2025 (≈ 10 ans).
 ```
 .
 ├── 01_data_engineering_PFA.py        Pipeline d'ingestion + nettoyage OMNI/IONEX
+├── 02_daily_sw_indices_PFA.py        Fichier daily : stats VTEC + indices F10.7/Kp/Dst
 ├── config/
 │   └── config.yaml                    Source de vérité unique (chemins, station, thème)
 ├── pfa_vtec/                          Package Python du projet
@@ -30,7 +31,8 @@ Période couverte : octobre 2015 → septembre 2025 (≈ 10 ans).
 │   ├── OMNI_30min_cleaned.csv         Vent solaire OMNI 30-min nettoyé
 │   ├── VTEC_GIM_30min_BeniMellal.csv  VTEC interpolé sur Beni Mellal
 │   ├── MERGED_OMNI_VTEC_30min.csv     Fusion 30-min (socle commun du projet)
-│   └── storm_catalog_Bz_lt_minus10.csv  Catalogue d'événements Bz < −10 nT
+│   ├── storm_catalog_Bz_lt_minus10.csv  Catalogue d'événements Bz < −10 nT
+│   └── DAILY_VTEC_SW_indices.csv      Stats journalières VTEC + F10.7 / Kp / Dst
 ├── requirements.txt
 ├── pyproject.toml
 └── .gitignore
@@ -52,6 +54,18 @@ Toutes produites par `01_data_engineering_PFA.py` à partir de deux sources publ
 | `VTEC_GIM_30min_BeniMellal.csv` | 30 min | 87 531 | 45.4 % |
 | `MERGED_OMNI_VTEC_30min.csv` | 30 min | 192 864 | 45.4 % |
 | `storm_catalog_Bz_lt_minus10.csv` | événementiel | 1 125 | — |
+
+Un fichier complémentaire, produit par `02_daily_sw_indices_PFA.py`, aligne les
+statistiques journalières du VTEC avec les proxies canoniques de météo de l'espace :
+
+| Fichier | Granularité | Lignes | Contenu |
+|---|---|---|---|
+| `DAILY_VTEC_SW_indices.csv` | journalier | 3 650 | Stats VTEC (moy. / méd. / σ / min / max / n) + F10.7, Kp, Ap, Dst |
+
+Indices téléchargés depuis leurs centres de référence : **F10.7** et **Kp / Ap** (GFZ
+Helmholtz Centre for Geosciences), **Dst** (WDC for Geomagnetism, Kyoto). Les
+téléchargements sont mis en cache dans `data_cache/` ; une seconde exécution est
+hors-ligne et les jours sans donnée restent vides (aucune valeur n'est inventée).
 
 ---
 
@@ -105,12 +119,17 @@ Reproduit l'intégralité des fichiers CSV dans `output/`.
 
 ## Onglets du tableau de bord
 
-| Onglet | Contenu |
-|---|---|
-| **A — VTEC Explorer** | Série temporelle interactive, KPIs, slider de plage |
-| **B — Storm Catalog** | Table des événements Bz < −10 nT, statistiques 2024 |
-| **C — Forecasting** | Comparaison de modèles × horizons 1–12 h |
-| **D — Anomalies** | Isolation Forest + One-Class SVM, scores et événements |
+Ce dépôt couvre l'axe **Visualisation**. Seuls les onglets **A** et **B** sont exposés
+dans le tableau de bord. Les onglets **C** (Prévision) et **D** (Détection d'anomalies)
+relèvent des deux autres axes du projet, confiés à d'autres membres de l'équipe, et sont
+volontairement **masqués** dans cette version pour éviter toute confusion.
+
+| Onglet | Contenu | Statut |
+|---|---|---|
+| **A — VTEC Explorer** | Série temporelle interactive, KPIs, slider de plage | Exposé |
+| **B — Storm Catalog** | Table des événements Bz < −10 nT, statistiques 2024 | Exposé |
+| **C — Forecasting** | Axe Prévision — autre membre de l'équipe | Masqué |
+| **D — Anomalies** | Axe Détection d'anomalies — autre membre de l'équipe | Masqué |
 
 ---
 
@@ -123,6 +142,7 @@ python -m pfa_vtec figures       Régénère les figures statiques
 python -m pfa_vtec features      Construit le cache de descripteurs
 python -m pfa_vtec train         Entraîne les modèles de prévision
 python -m pfa_vtec detect        Lance la détection d'anomalies
+python 02_daily_sw_indices_PFA.py  Fichier daily VTEC + indices F10.7/Kp/Dst
 ```
 
 ---
