@@ -128,8 +128,7 @@ volontairement **masqués** dans cette version pour éviter toute confusion.
 |---|---|---|
 | **A — VTEC Explorer** | Série temporelle interactive, KPIs, slider de plage | Exposé |
 | **B — Storm Catalog** | Table des événements Bz < −10 nT, statistiques 2024 | Exposé |
-| **C — Forecasting** | Axe Prévision — autre membre de l'équipe | Masqué |
-| **D — Anomalies** | Axe Détection d'anomalies — autre membre de l'équipe | Masqué |
+
 
 ---
 
@@ -140,8 +139,6 @@ python -m pfa_vtec smoke         Vérification du câblage (données + config)
 python -m pfa_vtec dashboard     Démarre le tableau de bord sur :8050
 python -m pfa_vtec figures       Régénère les figures statiques
 python -m pfa_vtec features      Construit le cache de descripteurs
-python -m pfa_vtec train         Entraîne les modèles de prévision
-python -m pfa_vtec detect        Lance la détection d'anomalies
 python 02_daily_sw_indices_PFA.py  Fichier daily VTEC + indices F10.7/Kp/Dst
 ```
 
