@@ -68,3 +68,6 @@ IONEX_decompressed*.zip
 ionex_dec/
 generated_unpacked/
 template_unpacked/
+
+# Cache des indices téléchargés (F10.7 / Kp / Dst) pour le fichier daily
+data_cache/
