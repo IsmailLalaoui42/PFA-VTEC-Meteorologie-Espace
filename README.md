@@ -80,7 +80,7 @@ hors-ligne et les jours sans donnée restent vides (aucune valeur n'est inventé
 
 ```powershell
 git clone <url-du-depot> pfa-vtec
-Set-Location pfa-vtec
+Set-Location pfa_vtec
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
