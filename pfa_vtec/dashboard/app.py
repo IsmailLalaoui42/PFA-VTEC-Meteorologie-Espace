@@ -18,8 +18,11 @@ register_plotly_template(default=True)
 def build_app() -> Dash:
     df = load_merged()
     storms = load_storms()
+    # La periode affichee est la fenetre VTEC reellement exploitable (oct. 2015 -> sep. 2025),
+    # et non la grille OMNI complete 2015-01 -> 2025-12.
+    df_vtec = df.dropna(subset=["vtec_mean"])
     summary = dict(
-        period_short=f"{df.index.min().strftime('%Y-%m')} -> {df.index.max().strftime('%Y-%m')}",
+        period_short=f"{df_vtec.index.min().strftime('%Y-%m')} -> {df_vtec.index.max().strftime('%Y-%m')}",
         n_rows=len(df),
         vtec_cov=df["vtec_mean"].notna().mean() * 100,
         n_storms=len(storms),
