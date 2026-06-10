@@ -119,15 +119,12 @@ Reproduit l'intégralité des fichiers CSV dans `output/`.
 
 ## Onglets du tableau de bord
 
-Ce dépôt couvre l'axe **Visualisation**. Seuls les onglets **A** et **B** sont exposés
-dans le tableau de bord. Les onglets **C** (Prévision) et **D** (Détection d'anomalies)
-relèvent des deux autres axes du projet, confiés à d'autres membres de l'équipe, et sont
-volontairement **masqués** dans cette version pour éviter toute confusion.
+Le tableau de bord expose les deux vues de l'axe **Visualisation** :
 
-| Onglet | Contenu | Statut |
-|---|---|---|
-| **A — VTEC Explorer** | Série temporelle interactive, KPIs, slider de plage | Exposé |
-| **B — Storm Catalog** | Table des événements Bz < −10 nT, statistiques 2024 | Exposé |
+| Onglet | Contenu |
+|---|---|
+| **A — VTEC Explorer** | Série temporelle interactive, KPIs, slider de plage |
+| **B — Storm Catalog** | Table des événements Bz < −10 nT, statistiques 2024 |
 
 
 ---
