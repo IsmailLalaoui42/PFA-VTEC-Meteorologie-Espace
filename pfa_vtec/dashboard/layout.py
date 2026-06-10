@@ -23,8 +23,8 @@ def build_layout(df_summary: dict) -> html.Div:
             html.Div(
                 style={"padding": "20px 32px 8px 32px"},
                 children=section_header(
-                    eyebrow="DASHBOARD / 04 ONGLETS",
-                    title="Visualisation, prevision et detection d anomalies VTEC",
+                    eyebrow="DASHBOARD VISUALISATION / 02 ONGLETS",
+                    title="Exploration et visualisation du VTEC  -  Beni Mellal",
                 ),
             ),
             html.Div(
@@ -41,11 +41,16 @@ def build_layout(df_summary: dict) -> html.Div:
                         value="tab-a",
                         parent_className="tabs-parent",
                         className="tabs",
+                        # Ce livrable couvre l'axe Visualisation : seuls les onglets A et B
+                        # sont exposes. Les onglets C (Prevision) et D (Detection
+                        # d'anomalies) relevent des deux autres axes du projet, confies a
+                        # d'autres membres de l'equipe ; ils sont volontairement masques ici
+                        # pour eviter toute confusion. Leurs constructeurs (_tab_c / _tab_d)
+                        # restent dans callbacks.py : il suffit de re-ajouter les dcc.Tab
+                        # ci-dessous pour les reactiver.
                         children=[
-                            dcc.Tab(label="A. VTEC EXPLORER",  value="tab-a", className="tab", selected_className="tab--selected"),
+                            dcc.Tab(label="A. VTEC EXPLORER", value="tab-a", className="tab", selected_className="tab--selected"),
                             dcc.Tab(label="B. STORM CATALOG", value="tab-b", className="tab", selected_className="tab--selected"),
-                            dcc.Tab(label="C. FORECAST",      value="tab-c", className="tab", selected_className="tab--selected"),
-                            dcc.Tab(label="D. ANOMALIES",     value="tab-d", className="tab", selected_className="tab--selected"),
                         ],
                     ),
                     html.Div(id="tab-content", style={"marginTop": "18px"}),
